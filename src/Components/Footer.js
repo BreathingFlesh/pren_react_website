@@ -23,7 +23,7 @@ export const Footer = () => {
                 <Col>
                     <b>Maschinentechnik </b>
                     <p>Toma Sarbach<br/>
-                    Sven Burri</p>
+                    Roger Beck</p>
                 </Col>
                 <Col>
                     <b>Hochschule Luzern</b>

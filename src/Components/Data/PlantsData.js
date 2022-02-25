@@ -1,5 +1,4 @@
 export const plantData = [
-
     {
         name: "Pfefferminz",
         img: "Pfefferminz.jpg",
@@ -8,6 +7,6 @@ export const plantData = [
     {
         name: "Nelke",
         img: "Nelke.jpg",
-    },
+    }
 
   ];
