@@ -1,0 +1,29 @@
+main {
+    margin-top: 50px;
+    padding: 1.2rem 0 0 0;
+}
+
+nav.bg-dark {
+    background: rgb(230, 230, 230) !important;
+}
+
+.navbar-light .navbar-brand {
+    color: grey;
+    font-weight: bold;
+}
+
+h2 {
+    margin-bottom: 2rem;
+}
+
+.card {
+    margin-bottom: 1rem;
+}
+
+.match {
+    background: rgba(126, 180, 39, 0.42);
+}
+
+footer {
+    color: grey;
+}
