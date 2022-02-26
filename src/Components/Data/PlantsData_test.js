@@ -1,0 +1,1 @@
+export const plantData = [{"name": "Nelke", "image": "test.jpg"}, {"name": "Pfefferminuz", "image": "test.jpg"}];

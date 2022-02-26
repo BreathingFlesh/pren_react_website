@@ -1,5 +1,5 @@
 import React from "react";
-import { plantData } from "./Data/PlantsData.js";
+import { plantData } from "./Data/PlantsData_test.js";
 
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
