@@ -20,9 +20,9 @@ function App() {
 
   /*let blah = "testitest"*/
   return (
-    <div className="App">
+    <div className="App d-flex flex-column min-vh-100">
       <Navigation></Navigation>
-      <main>
+      <main className="flex-fill">
         <Container>
           <Row>
             <Col className="col-md-3">

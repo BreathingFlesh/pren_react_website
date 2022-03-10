@@ -1,1 +1,1 @@
-export const plantData = [{"name": "Nelke", "image": "test.jpg"}, {"name": "Pfefferminuz", "image": "test.jpg"}];
+export const plantData = [{"name": "Pfefferminz", "image": "test.jpg"}, {"name": "Gurkepflanze", "image": "test.jpg"}];

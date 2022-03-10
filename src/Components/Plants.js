@@ -9,7 +9,7 @@ export const Zielgerade = () => {
   return (
     <>
       <div className="plant-container">
-        <h2 id="Pflanze">Zielgerade</h2>
+        <h2 id="Zielgerade">Zielgerade</h2>
         <Row>
           {plantData.map((data, key) => {
             return (

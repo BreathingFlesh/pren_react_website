@@ -1,5 +1,6 @@
 from flask import Flask, request, abort
 import json
+from waitress import serve
 
 app = Flask(__name__)
 plantdata = []
@@ -22,4 +23,5 @@ def webhook():
         abort(400)
 
 if __name__ == '__main__':
-    app.run()
+    # app.run()
+    serve(app, host="127.0.0.1", port=8080)
