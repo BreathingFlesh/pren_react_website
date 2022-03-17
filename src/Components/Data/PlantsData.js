@@ -1,12 +1,1 @@
-export const plantData = [
-    {
-        name: "Pfefferminz",
-        img: "Pfefferminz.jpg",
-    },
-
-    {
-        name: "Nelke",
-        img: "Nelke.jpg",
-    }
-
-  ];
+export const plantData = [{"name": "Test", "image": "img/Pfefferminze.jpg", "position": 1}, {"name": "Test", "image": "img/Pfefferminze.jpg", "position": 2}];

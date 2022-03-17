@@ -1,1 +1,0 @@
-export const plantData = [{"name": "Pfefferminz", "image": "test.jpg"}, {"name": "Gurkepflanze", "image": "test.jpg"}];

@@ -1,5 +1,5 @@
 import React from "react";
-import { plantData } from "./Data/PlantsData_test.js";
+import { plantData } from "./Data/PlantsData.js";
 
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
@@ -15,8 +15,9 @@ export const Zielgerade = () => {
             return (
               <Plant
                 key={key}
+                image={data.image}
                 name={data.name}
-                img={data.img}
+                position={data.position}
               /> 
             );
           })}
@@ -26,15 +27,15 @@ export const Zielgerade = () => {
   );
 };
 
-const Plant = ({name, img}) => {
+const Plant = ({name, image, position}) => {
   return (
     <>     
       <Col className="col-sm-4">
         <div className="card">
-          <Image src="assets/img/{img}" className="card-img-top d-md-block d-none" alt="Pflanze"></Image>
+          <Image src={image} className="card-img-top d-md-block d-none" alt="Pflanze"></Image>
           <div className="card-body">
             <h5 className="card-title">{name}</h5> 
-            Position #3<br></br>
+            <p>Position #{position}<br></br></p>
           </div>
         </div>
       </Col>
