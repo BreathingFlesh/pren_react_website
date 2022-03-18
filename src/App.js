@@ -11,7 +11,6 @@ import { Navigation } from "./Components/Navigation";
 import { Footer } from "./Components/Footer";
 import { StatusInfo } from "./Components/StatusInfo";
 import { Plant } from "./Components/Plant";
-import { Plants } from "./Components/Zielgerade";
 import { Zielgerade } from "./Components/Zielgerade";
 
 

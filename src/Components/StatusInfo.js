@@ -1,7 +1,8 @@
 import React from "react";
 import Table from 'react-bootstrap/Table';
+import { statusData } from "./Data/StatusData";
 
-export const StatusInfo = () => {
+export const StatusInfoalt = () => {
   return (
     <>
       <h2 id="Infos">Infos</h2>
@@ -23,6 +24,37 @@ export const StatusInfo = () => {
           <td>...</td>
         </tr>
       </Table>
+    </>
+  );
+};
+
+export const StatusInfo = () => {
+  return (
+    <>
+      <h2 id="Infos">Infos</h2>
+      <Table>
+        {statusData.map((data, key) => {
+          return (
+            <TableRow
+            key={key}
+            name={data.name}
+            value={data.value}
+          /> 
+          );
+        })}
+      </Table>
+    </>
+  );
+};
+
+
+const TableRow = ({name, value}) => {
+  return (
+    <>     
+      <tr>
+        <td>{name}</td>
+        <td>{value}</td>
+      </tr>
     </>
   );
 };
