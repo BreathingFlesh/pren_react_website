@@ -23,13 +23,13 @@ function App() {
       <main className="flex-fill">
         <Container>
           <Row>
-            <Col className="col-md-3">
+            <Col className="col-12 col-md-3">
               <StatusInfo></StatusInfo>
-            </Col>  
-            <Col className="col-md-3">
+            </Col> 
+            <Col className="col-12 col-md-3">
               <Plant></Plant>
             </Col>  
-            <Col className="col-md-6">
+            <Col className="col-12 col-md-6">
               <Zielgerade></Zielgerade>
             </Col>
           </Row>

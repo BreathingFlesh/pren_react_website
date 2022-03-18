@@ -5,13 +5,15 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Image from 'react-bootstrap/Image';
 
+const remainingPlants = plantData.slice(1)
+
 export const Zielgerade = () => {
   return (
     <>
       <div className="plant-container">
         <h2 id="Zielgerade">Zielgerade</h2>
         <Row>
-          {plantData.map((data, key) => {
+          {remainingPlants.map((data, key) => {
             return (
               <Plant
                 key={key}
