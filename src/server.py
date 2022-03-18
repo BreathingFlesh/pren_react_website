@@ -4,8 +4,25 @@ from waitress import serve
 
 app = Flask(__name__)
 plantdata = []
-status = []
-# statusFile = open("src/Components/Data/StatusData.js", "w")
+status = [
+    {
+        'name': 'Gefahrene Meter',
+        'value': '0 m'
+    },
+    {
+        'name': 'Zeit bei Start',
+        'value': '00:00:00'
+    },
+    {
+        'name': 'Zeit bei Ziel',
+        'value': '00:00:00'
+    },
+    {
+        'name': 'Fahrtzeit',
+        'value': '00:00:00'
+    }
+]
+
 
 def writePlantData():
         data = f"export const plantData = {json.dumps(plantdata)};"
@@ -52,4 +69,7 @@ def status_webhook():
 
 if __name__ == '__main__':
     app.run()
+    statusData = f"export const statusData = {json.dumps(status)};"
+    statusFile = open("src/Components/Data/StatusData.js", "w")
+    statusFile.write(statusData)
     # serve(app, host="127.0.0.1", port=8080)

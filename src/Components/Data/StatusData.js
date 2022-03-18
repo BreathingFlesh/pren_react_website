@@ -1,1 +1,1 @@
-export const statusData = [];
+export const statusData = [{"name": "Gefahrene Meter", "value": "00 m"}, {"name": "Zeit bei Start", "value": "00:00:00"}, {"name": "Zeit bei Ziel", "value": "00:00:00"}, {"name": "Fahrtzeit", "value": "00:00:00"}];
