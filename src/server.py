@@ -3,6 +3,7 @@ import json
 from waitress import serve
 
 app = Flask(__name__)
+
 plantdata = []
 status = [
     {
@@ -52,10 +53,10 @@ def status_webhook():
         
         if request.json["name"] == "Zeit bei Start":
             plantdata = []
-            status = []
-            writePlantData(data)
+            writePlantData()
+            statusFile = open("src/Components/Data/StatusData.js", "w")
+            status[1] = request.json
 
-        status.append(request.json)
         data = f"export const statusData = {json.dumps(status)};"
         statusFile.write(data)
 
@@ -72,4 +73,5 @@ if __name__ == '__main__':
     statusData = f"export const statusData = {json.dumps(status)};"
     statusFile = open("src/Components/Data/StatusData.js", "w")
     statusFile.write(statusData)
+    statusFile.close()
     # serve(app, host="127.0.0.1", port=8080)
