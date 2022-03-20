@@ -5,7 +5,7 @@ from waitress import serve
 app = Flask(__name__)
 
 plantdata = []
-status = [
+status_start = [
     {
         'name': 'Gefahrene Meter',
         'value': '0 m'
@@ -17,12 +17,9 @@ status = [
     {
         'name': 'Zeit bei Ziel',
         'value': '00:00:00'
-    },
-    {
-        'name': 'Fahrtzeit',
-        'value': '00:00:00'
     }
 ]
+status = []
 
 
 def writePlantData():
@@ -50,18 +47,20 @@ def status_webhook():
     if request.method == 'POST':
         global plantdata
         global status
+        statusFile = open("src/Components/Data/StatusData.js", "w")
         
         if request.json["name"] == "Zeit bei Start":
+            status = status_start.copy()
             plantdata = []
             writePlantData()
-            statusFile = open("src/Components/Data/StatusData.js", "w")
             status[1] = request.json
-
-        data = f"export const statusData = {json.dumps(status)};"
-        statusFile.write(data)
-
+            data = f"export const statusData = {json.dumps(status)};"
+            statusFile.write(data)
+        
         if request.json["name"] == "Zeit bei Ziel":
-            # Zit is Dictionary ond denn is File schribe
+            status[2] = request.json
+            data = f"export const statusData = {json.dumps(status)};"
+            statusFile.write(data)
             statusFile.close()
         
         return 'success', 200
