@@ -20,7 +20,7 @@ export const StatusInfo = () => {
           })}
           <tr>
             <td>Fahrtzeit</td>
-            <td><Stopwatch /></td>
+            <td className="text-end"><Stopwatch /></td>
           </tr>
         </tbody>
       </Table>
@@ -34,7 +34,7 @@ const TableRow = ({name, value}) => {
     <>     
       <tr>
         <td>{name}</td>
-        <td>{value}</td>
+        <td className="text-end">{value}</td>
       </tr>
     </>
   );
