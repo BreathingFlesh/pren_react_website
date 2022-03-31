@@ -20,7 +20,7 @@ export const StatusInfo = () => {
           })}
           <tr>
             <td>Fahrtzeit</td>
-            <td className="text-end"><Stopwatch /></td>
+              <Stopwatch countdownTimestampMs={1659983662000}/>
           </tr>
         </tbody>
       </Table>

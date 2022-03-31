@@ -1,49 +1,61 @@
-import React, { useState, useEffect } from "react";
+import {useState, useEffect} from 'react';
+import {getRemainingTimeUntilMsTimestamp} from './Utils/CountdownTimerUtils';
 import { statusData } from "./Data/StatusData";
 
-export const Stopwatch = () => {
-    const [time, setTime] = useState(0);
-    const [running, setRunning] = useState(false);
+const defaultRemainingTime = {
+    seconds: '00',
+    minutes: '00',
+    hours: '00',
+    days: '00'
+}
+
+const startTime = statusData[1]["value"].split(":")
+
+const CountdownTimer = ({countdownTimestampMs}) => {
+    const [remainingTime, setRemainingTime] = useState(defaultRemainingTime);
+    
+    const start = new Date(2022, 2, 25, startTime[0], startTime[1], startTime[2]).valueOf()
+
     useEffect(() => {
-        //min Code. Help! :(
-        if (statusData[1]["value"] !== "00:00:00") {
-            setRunning(true)
-        }
-        if (statusData[2]["value"] !== "00:00:00") {
-            setTime((prevTime) => prevTime + 500)
-            setRunning(false)
-        }
 
-      let interval;
-      if (running) {
-        interval = setInterval(() => {
-          setTime((prevTime) => prevTime + 1000);
-        }, 1000);
-      } else if (!running) {
-        clearInterval(interval);
-      }
-      return () => clearInterval(interval);
-    }, [running]);
-    return (
-      <div className="stopwatch">
-        <div className="numbers">
-          {/* Original Code */}
-          {/* <span>{("0" + Math.floor((time / 60000) % 60)).slice(-2)}:</span>
-          <span>{("0" + Math.floor((time / 1000) % 60)).slice(-2)}:</span>
-          {<span>{("0" + ((time / 10) % 100)).slice(-2)}</span>} */}
+            const intervalId = setInterval(() => {  
+                updateRemainingTime(countdownTimestampMs);
+            }, 1000);
+            return () => clearInterval(intervalId);
 
-          {/* Min Code */}
-          <span>{("0" + Math.floor((time / 60000) % 60)).slice(-2)}:</span>
-          <span>{("0" + Math.floor((time / 1000) % 60)).slice(-2)}</span>
+    },[countdownTimestampMs]);
 
-        </div>
-        <div className="buttons">
-          {/* <button onClick={() => setRunning(true)}>Start</button>
-          <button onClick={() => setRunning(false)}>Stop</button> */}
-          <button onClick={() => setTime(0)}>Reset</button>
-        </div>
-      </div>
+    function updateRemainingTime(countdown) {
+        setRemainingTime(getRemainingTimeUntilMsTimestamp(start));
+    }
+    
+
+    return(
+            <td className="text-end">
+                {(() => {
+                    if (statusData[2]["value"] == "00:00:00") {
+                        return(
+                            <div>
+                                <span className="two-numbers">{remainingTime.minutes * -1}</span>
+                                <span>:</span>
+                                <span className="two-numbers">{remainingTime.seconds * -1}</span>
+                            </div>
+                        )
+                    } else {
+                        const endTime = statusData[2]["value"].split(":")
+                        const end = new Date(2022, 2, 25, endTime[0], endTime[1], endTime[2]).valueOf()
+                        const diffSeconds = (end - start) / 1000
+                        return(
+                            <div>
+                                <span className="two-numbers">{Math.floor(diffSeconds / 60)}</span>
+                                <span>:</span>
+                                <span className="two-numbers">{diffSeconds % 60}</span>
+                            </div>
+                        )
+                    }
+                })()}
+            </td>
     );
-  };
+}
 
-  export default Stopwatch;
+export default CountdownTimer;

@@ -49,6 +49,13 @@ def status_webhook():
         global status
         statusFile = open("src/Components/Data/StatusData.js", "w")
         
+        if request.json["name"] == "Gefahrene Meter":
+            status[0] = request.json
+            data = f"export const statusData = {json.dumps(status)};"
+            statusFile.write(data)
+            print("Meter")
+            print(status)
+        
         if request.json["name"] == "Zeit bei Start":
             status = status_start.copy()
             plantdata = []
@@ -56,21 +63,35 @@ def status_webhook():
             status[1] = request.json
             data = f"export const statusData = {json.dumps(status)};"
             statusFile.write(data)
+            print("Start")
+            print(status)
         
         if request.json["name"] == "Zeit bei Ziel":
             status[2] = request.json
             data = f"export const statusData = {json.dumps(status)};"
             statusFile.write(data)
             statusFile.close()
+            print("Ziel")
+            print(status)
         
+        return 'success', 200
+    else:
+        abort(400)
+
+@app.route('/clear-webhook', methods=['POST'])
+def clear_webhook():
+    if request.method == 'POST':
+        plantdata = []
+        writePlantData()
+        status = status_start.copy()
+        statusFile = open("src/Components/Data/StatusData.js", "w")
+        data = f"export const statusData = {json.dumps(status)};"
+        statusFile.write(data)
+        statusFile.close()
         return 'success', 200
     else:
         abort(400)
 
 if __name__ == '__main__':
     app.run()
-    statusData = f"export const statusData = {json.dumps(status)};"
-    statusFile = open("src/Components/Data/StatusData.js", "w")
-    statusFile.write(statusData)
-    statusFile.close()
     # serve(app, host="127.0.0.1", port=8080)
