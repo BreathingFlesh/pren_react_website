@@ -1,8 +1,11 @@
-from flask import Flask, request, abort
+from flask import Flask, request, abort, jsonify
 import json
+import flask_cors
 from waitress import serve
 
+cors = flask_cors.CORS()
 app = Flask(__name__)
+cors.init_app(app)
 
 plantdata = []
 status_start = [
@@ -53,26 +56,18 @@ def status_webhook():
             status[0] = request.json
             data = f"export const statusData = {json.dumps(status)};"
             statusFile.write(data)
-            print("Meter")
-            print(status)
-        
-        if request.json["name"] == "Zeit bei Start":
+        elif request.json["name"] == "Zeit bei Start":
             status = status_start.copy()
             plantdata = []
             writePlantData()
             status[1] = request.json
             data = f"export const statusData = {json.dumps(status)};"
             statusFile.write(data)
-            print("Start")
-            print(status)
-        
-        if request.json["name"] == "Zeit bei Ziel":
+        elif request.json["name"] == "Zeit bei Ziel":
             status[2] = request.json
             data = f"export const statusData = {json.dumps(status)};"
             statusFile.write(data)
             statusFile.close()
-            print("Ziel")
-            print(status)
         
         return 'success', 200
     else:
@@ -91,6 +86,12 @@ def clear_webhook():
         return 'success', 200
     else:
         abort(400)
+
+@app.route('/status', methods=['GET'])
+def status_json():
+    response = jsonify({'some': 'data'})
+    response.headers.add('Access-Control-Allow-Origin', '*')
+    return response
 
 if __name__ == '__main__':
     app.run()

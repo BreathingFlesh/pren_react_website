@@ -11,24 +11,25 @@ const defaultRemainingTime = {
 
 const startTime = statusData[1]["value"].split(":")
 
-const CountdownTimer = ({countdownTimestampMs}) => {
+const CountdownTimer = () => {
     const [remainingTime, setRemainingTime] = useState(defaultRemainingTime);
     
     const start = new Date(2022, 2, 25, startTime[0], startTime[1], startTime[2]).valueOf()
 
     useEffect(() => {
 
-            const intervalId = setInterval(() => {  
-                updateRemainingTime(countdownTimestampMs);
+        function updateRemainingTime() {
+            var time = getRemainingTimeUntilMsTimestamp(start)
+            console.debug("Zeit: ", time)
+            setRemainingTime(getRemainingTimeUntilMsTimestamp(start));
+        }
+
+        const intervalId = setInterval(() => {  
+                updateRemainingTime();
+                fetch("http://127.0.0.1:5000/status").then(Response=>Response.json()).then(data=>console.log(data))
             }, 1000);
             return () => clearInterval(intervalId);
-
-    },[countdownTimestampMs]);
-
-    function updateRemainingTime(countdown) {
-        setRemainingTime(getRemainingTimeUntilMsTimestamp(start));
-    }
-    
+    });
 
     return(
             <td className="text-end">
