@@ -89,7 +89,7 @@ def clear_webhook():
 
 @app.route('/status', methods=['GET'])
 def status_json():
-    response = jsonify({'some': 'data'})
+    response = jsonify({'some': 'wurstsalat'})
     response.headers.add('Access-Control-Allow-Origin', '*')
     return response
 
