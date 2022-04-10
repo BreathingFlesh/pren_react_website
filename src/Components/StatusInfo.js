@@ -1,31 +1,59 @@
 import {useState, useEffect} from "react";
 import Table from 'react-bootstrap/Table';
-import { statusData } from "./Data/StatusData";
-import Stopwatch from "./Stopwatch";
+import {getRemainingTimeUntilMsTimestamp} from './Utils/CountdownTimerUtils';
 
 export const StatusInfo = () => {
 
-  const [info, setData] = useState([]);
+  // Status Info
+  const [info, setData] = useState([    
+    {
+        'name': 'Gefahrene Meter',
+        'value': '0 m'
+    },
+    {
+        'name': 'Zeit bei Start',
+        'value': '00:00:00'
+    },
+    {
+        'name': 'Zeit bei Ziel',
+        'value': '00:00:00'
+    }
+  ]);
 
+  //Countdown Timer
+  const defaultRemainingTime = {
+      seconds: '00',
+      minutes: '00',
+      hours: '00',
+      days: '00'
+  }
+  const startTime = info[1]["value"].split(":")
+  const [remainingTime, setRemainingTime] = useState(defaultRemainingTime);
+  const start = new Date(2022, 2, 25, startTime[0], startTime[1], startTime[2]).valueOf()
 
-  useEffect(() => {
+    // Status Info
     function getData() {
       fetch("http://127.0.0.1:5000/status")
         .then(function(response){
-          console.log("response", response)
           return response.json();
         })
         .then(function(myJson) {
-          console.log("Json", myJson)
-          setData([myJson]);
+          setData(myJson);
         });
     }
 
-    const intervalId = setInterval(() => {
-        // gurk = fetch("http://127.0.0.1:5000/status").then(Response=>Response.json())
-        getData()
-    }, 1000);
-    return () => clearInterval(intervalId);
+    //Countdown Timer
+    function updateRemainingTime() {
+      var time = getRemainingTimeUntilMsTimestamp(start)
+      setRemainingTime(getRemainingTimeUntilMsTimestamp(start));
+    }
+
+  useEffect(() => {
+      const intervalId = setInterval(() => {  
+          getData();     
+          updateRemainingTime();
+          }, 1000);
+          return () => clearInterval(intervalId);
   })
 
   return (
@@ -33,10 +61,9 @@ export const StatusInfo = () => {
       <h2 id="Infos">Infos</h2>
       <Table>
         <tbody>
-          {statusData.map((data, key) => {
+          {info.length>0 && info.map((data) => {
             return (
               <TableRow
-              key={key}
               name={data.name}
               value={data.value}
             /> 
@@ -44,10 +71,30 @@ export const StatusInfo = () => {
           })}
           <tr>
             <td>Fahrtzeit</td>
-            {
-              info.length>0 && info.map((item)=><p>{item.some}test</p>)
-            }
-              {/* <Stopwatch/> */}
+            <td className="text-end">
+              {(() => {
+                if (info[2]["value"] == "00:00:00") {
+                  return(
+                    <div>
+                      {remainingTime.minutes * -1}
+                      :
+                      {remainingTime.seconds * -1}
+                    </div>
+                  )
+                } else {
+                  const endTime = info[2]["value"].split(":")
+                  const end = new Date(2022, 2, 25, endTime[0], endTime[1], endTime[2]).valueOf()
+                  const diffSeconds = (end - start) / 1000
+                  return(
+                    <div>
+                        {Math.floor(diffSeconds / 60)}
+                        :
+                        {diffSeconds % 60}
+                    </div>
+                  )
+                }
+              })()}
+            </td>
           </tr>
         </tbody>
       </Table>

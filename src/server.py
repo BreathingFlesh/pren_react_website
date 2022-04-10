@@ -22,7 +22,7 @@ status_start = [
         'value': '00:00:00'
     }
 ]
-status = []
+status = status_start.copy()
 
 
 def writePlantData():
@@ -54,8 +54,8 @@ def status_webhook():
         
         if request.json["name"] == "Gefahrene Meter":
             status[0] = request.json
-            data = f"export const statusData = {json.dumps(status)};"
-            statusFile.write(data)
+            # data = f"export const statusData = {json.dumps(status)};"
+            # statusFile.write(data)
         elif request.json["name"] == "Zeit bei Start":
             status = status_start.copy()
             plantdata = []
@@ -89,7 +89,13 @@ def clear_webhook():
 
 @app.route('/status', methods=['GET'])
 def status_json():
-    response = jsonify({'some': 'wurstsalat'})
+    response = jsonify(status)
+    response.headers.add('Access-Control-Allow-Origin', '*')
+    return response
+
+@app.route('/plants', methods=['GET'])
+def status_json():
+    response = jsonify(plantdata)
     response.headers.add('Access-Control-Allow-Origin', '*')
     return response
 
