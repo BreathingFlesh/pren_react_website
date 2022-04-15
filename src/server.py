@@ -2,7 +2,10 @@ from flask import Flask, request, abort, jsonify
 import json
 import flask_cors
 from waitress import serve
+import os
 
+# app = Flask(__name__, static_url_path='', static_folder='../build')
+# cors = flask_cors.CORS(app, resources={r"/*":{"origins":"*"}})
 cors = flask_cors.CORS()
 app = Flask(__name__)
 cors.init_app(app)
@@ -93,12 +96,17 @@ def status_json():
     response.headers.add('Access-Control-Allow-Origin', '*')
     return response
 
-@app.route('/plants', methods=['GET'])
-def status_json():
-    response = jsonify(plantdata)
-    response.headers.add('Access-Control-Allow-Origin', '*')
-    return response
+
+# Serve React App
+@app.route("/")
+def init():
+    print("handle called")
+    return app.send_static_file('index.html')
+
 
 if __name__ == '__main__':
-    app.run()
+    app.run(use_reloader=True, port=5000, threaded=True, debug=False)
+
+# if __name__ == '__main__':
+#     app.run()
     # serve(app, host="127.0.0.1", port=8080)

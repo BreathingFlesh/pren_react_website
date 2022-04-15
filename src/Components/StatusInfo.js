@@ -73,7 +73,7 @@ export const StatusInfo = () => {
             <td>Fahrtzeit</td>
             <td className="text-end">
               {(() => {
-                if (info[2]["value"] == "00:00:00") {
+                if (info[2]["value"] == "00:00:00" && info[1]["value"] != "00:00:00") {
                   return(
                     <div>
                       {remainingTime.minutes * -1}
