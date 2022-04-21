@@ -35,7 +35,7 @@ export const StatusInfo = () => {
     function getData() {
       // Don't fetch for now
       // fetch("https://aqueous-dawn-52031.herokuapp.com/status")
-      fetch("/status")
+      fetch("http://127.0.0.1:5000/status")
         .then(function(response){
           return response.json();
         })
@@ -56,6 +56,7 @@ export const StatusInfo = () => {
           getData();     
           updateRemainingTime();
           }, 1000);
+          return () => clearInterval(intervalId);
   })
 
   return (
