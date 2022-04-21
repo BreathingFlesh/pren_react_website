@@ -1,63 +1,6 @@
-import {useState, useEffect} from "react";
 import Table from 'react-bootstrap/Table';
-import {getRemainingTimeUntilMsTimestamp} from './Utils/CountdownTimerUtils';
 
-export const StatusInfo = () => {
-
-  // Status Info
-  const [info, setData] = useState([    
-    {
-        'name': 'Gefahrene Meter',
-        'value': '0 m'
-    },
-    {
-        'name': 'Zeit bei Start',
-        'value': '00:00:00'
-    },
-    {
-        'name': 'Zeit bei Ziel',
-        'value': '00:00:00'
-    }
-  ]);
-
-  //Countdown Timer
-  const defaultRemainingTime = {
-      seconds: '00',
-      minutes: '00',
-      hours: '00',
-      days: '00'
-  }
-  const startTime = info[1]["value"].split(":")
-  const [remainingTime, setRemainingTime] = useState(defaultRemainingTime);
-  const start = new Date(2022, 2, 25, startTime[0], startTime[1], startTime[2]).valueOf()
-
-    // Status Info
-    function getData() {
-      // Don't fetch for now
-      // fetch("https://aqueous-dawn-52031.herokuapp.com/status")
-      fetch("http://127.0.0.1:5000/status")
-        .then(function(response){
-          return response.json();
-        })
-        .then(function(myJson) {
-          setData(myJson);
-          console.log(myJson)
-        });
-    }
-
-    //Countdown Timer
-    function updateRemainingTime() {
-      var time = getRemainingTimeUntilMsTimestamp(start)
-      setRemainingTime(getRemainingTimeUntilMsTimestamp(start));
-    }
-
-  useEffect(() => {
-      const intervalId = setInterval(() => {  
-          getData();     
-          updateRemainingTime();
-          }, 1000);
-          return () => clearInterval(intervalId);
-  })
+export const StatusInfo = ({info, remainingTime, start}) => {
 
   return (
     <>
