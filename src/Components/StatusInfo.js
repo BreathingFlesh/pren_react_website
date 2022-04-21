@@ -33,7 +33,9 @@ export const StatusInfo = () => {
 
     // Status Info
     function getData() {
-      fetch("https://aqueous-dawn-52031.herokuapp.com/status")
+      // Don't fetch for now
+      // fetch("https://aqueous-dawn-52031.herokuapp.com/status")
+      fetch("/status")
         .then(function(response){
           return response.json();
         })
