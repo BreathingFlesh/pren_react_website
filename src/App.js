@@ -51,9 +51,8 @@ function App() {
 
   // Fetch Status Info & Plants
   function getData() {
-    // Don't fetch for now
-    // fetch("https://aqueous-dawn-52031.herokuapp.com/status")
-    fetch("http://127.0.0.1:5000/status")
+    fetch("https://aqueous-dawn-52031.herokuapp.com/status")
+    // fetch("http://127.0.0.1:5000/status")
       .then(function(response){
         return response.json();
       })
@@ -62,7 +61,7 @@ function App() {
         console.log("Status")
         console.log(myJson)
       });
-    fetch("http://127.0.0.1:5000/plants")
+    fetch("https://aqueous-dawn-52031.herokuapp.com/plants")
       .then(function(response){
         return response.json();
       })
