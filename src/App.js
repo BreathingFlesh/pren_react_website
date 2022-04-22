@@ -59,7 +59,8 @@ function App() {
       })
       .then(function(myJson) {
         setData(myJson);
-        // console.log(myJson)
+        console.log("Status")
+        console.log(myJson)
       });
     fetch("http://127.0.0.1:5000/plants")
       .then(function(response){
@@ -67,23 +68,26 @@ function App() {
       })
       .then(function(myJson) {
         setPlants(myJson);
-        // console.log(myJson)
+        console.log("Plants")
+        console.log(myJson)
       });
   }
 
   //Countdown Timer
   function updateRemainingTime() {
-    var time = getRemainingTimeUntilMsTimestamp(start)
     setRemainingTime(getRemainingTimeUntilMsTimestamp(start));
   }
 
   useEffect(() => {
       const intervalId = setInterval(() => {  
-          getData();     
+          getData();
           updateRemainingTime();
           }, 1000);
           return () => clearInterval(intervalId);
   })
+
+  const firstPlant = plants.slice(0, 1)
+  const remainingPlants = plants.slice(1)
 
   return (
     <div className="App d-flex flex-column min-vh-100">
@@ -99,10 +103,14 @@ function App() {
               />
             </Col> 
             <Col className="col-12 col-md-3">
-              <Plant></Plant>
+              <Plant
+                firstPlant={firstPlant}
+              />
             </Col>  
             <Col className="col-12 col-md-6">
-              <Zielgerade></Zielgerade>
+              <Zielgerade
+                remainingPlants={remainingPlants}
+              />
             </Col>
           </Row>
         </Container>

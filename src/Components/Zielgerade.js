@@ -1,22 +1,18 @@
 import React from "react";
-import { plantData } from "./Data/PlantData.js";
 
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Image from 'react-bootstrap/Image';
 
-const remainingPlants = plantData.slice(1)
-
-export const Zielgerade = () => {
+export const Zielgerade = ({remainingPlants}) => {
   return (
     <>
       <div className="plant-container">
         <h2 id="Zielgerade">Zielgerade</h2>
         <Row>
-          {remainingPlants.map((data, key) => {
+          {remainingPlants.length>0 && remainingPlants.map((data) => {
             return (
               <Plant
-                key={key}
                 image={data.image}
                 name={data.name}
                 position={data.position}

@@ -1,15 +1,13 @@
 import React from "react";
-import { plantData } from "./Data/PlantData.js";
 
 import Image from 'react-bootstrap/Image';
 
-const firstPlant = plantData.slice(0, 1)
+export const Plant = ({firstPlant}) => {
 
-export const Plant = () => {
   return (
     <>
       <h2 id="Pflanze">Erste Pflanze</h2>
-          {firstPlant.map((data, key) => {
+          {firstPlant.length>0 && firstPlant.map((data, key) => {
             return (
               <Content
                 key={key}
