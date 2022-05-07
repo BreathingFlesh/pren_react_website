@@ -58,17 +58,18 @@ function App() {
       })
       .then(function(myJson) {
         setData(myJson);
-        console.log("Status")
-        console.log(myJson)
+        // console.log("Status")
+        // console.log(myJson)
       });
     fetch("https://aqueous-dawn-52031.herokuapp.com/plants")
+    // fetch("http://127.0.0.1:5000/plants")
       .then(function(response){
         return response.json();
       })
       .then(function(myJson) {
         setPlants(myJson);
-        console.log("Plants")
-        console.log(myJson)
+        // console.log("Plants")
+        // console.log(myJson)
       });
   }
 
