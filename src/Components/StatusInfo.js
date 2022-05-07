@@ -15,6 +15,33 @@ export const StatusInfo = ({info, remainingTime, start}) => {
             /> 
             );
           })}
+          <tr>
+            <td>Fahrtzeit</td>
+            <td className="text-end">
+              {(() => {
+                if (info[2]["value"] == "00:00:00" && info[1]["value"] != "00:00:00") {
+                  return(
+                    <div>
+                      {remainingTime.minutes * -1}
+                      :
+                      {remainingTime.seconds * -1}
+                    </div>
+                  )
+                } else {
+                  const endTime = info[2]["value"].split(":")
+                  const end = new Date(2022, 2, 25, endTime[0], endTime[1], endTime[2]).valueOf()
+                  const diffSeconds = (end - start) / 1000
+                  return(
+                    <div>
+                        {Math.floor(diffSeconds / 60)}
+                        :
+                        {diffSeconds % 60}
+                    </div>
+                  )
+                }
+              })()}
+            </td>
+          </tr>
         </tbody>
       </Table>
     </>
