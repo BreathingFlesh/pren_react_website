@@ -35,6 +35,10 @@ function App() {
     {
         'name': 'Zeit bei Ziel',
         'value': '00:00:00'
+    },
+    {
+        'name': 'Fartzeit',
+        'value': '0:00'
     }
   ]);
 
