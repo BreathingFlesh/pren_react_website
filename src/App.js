@@ -79,9 +79,15 @@ function App() {
   }
 
   useEffect(() => {
+      const intervalId = setInterval(() => {
+        updateRemainingTime();
+        }, 500);
+          return () => clearInterval(intervalId);
+  })
+
+  useEffect(() => {
       const intervalId = setInterval(() => {  
           getData();
-          updateRemainingTime();
           }, 1000);
           return () => clearInterval(intervalId);
   })
