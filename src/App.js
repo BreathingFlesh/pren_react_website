@@ -35,6 +35,10 @@ function App() {
     {
         'name': 'Zeit bei Ziel',
         'value': '00:00:00'
+    },
+    {
+        'name': 'Fahrtzeit',
+        'value': '0:00'
     }
   ]);
 
@@ -77,13 +81,6 @@ function App() {
   function updateRemainingTime() {
     setRemainingTime(getRemainingTimeUntilMsTimestamp(start));
   }
-
-  useEffect(() => {
-      const intervalId = setInterval(() => {
-        updateRemainingTime();
-        }, 500);
-          return () => clearInterval(intervalId);
-  })
 
   useEffect(() => {
       const intervalId = setInterval(() => {  
